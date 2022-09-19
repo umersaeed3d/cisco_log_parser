@@ -1,16 +1,30 @@
-# Migration_suite
-Firewall Migration Suite - FYP CIS Batch 2017
+# Cisco_logs_analyzer
 
-<b>Pre requisite:</b> 
-<ul>
-  <li>Python 3.x</li>
-  <li>MySQL Database</li>
-</ul>
+Cisco Logs Analyzer is for analyzing your cisco logs in terms of pie-charts, graphs and tabular form.
+It contains a dashboard with authentication with following functionalities:
 
-<b>Instructions</b>
-<ul>
-  <li>Clone the repository</li>
-  <li>Go to the repo and run command ```pip install requirments.txt```</li>
-  <li>Configure your MySQL database in settings.py</li>
-  <li>Apply migrations : ```python manage.py migrate```</li>
-</ul>
+- Login/Signup
+- You can upload your own cisco logs text file to analyze in better way.
+- You can view pre-existing logs that have been beautified in terms of pie-charts, graphs and tables.
+- You can view/download the uploaded logs history.
+
+# Technologies Used:
+- Python
+- Django
+- REGEX
+- MySQL
+- HTML
+- CSS
+- Bootstrap
+
+
+# Steps:
+
+- git clone https://github.com/umersaeed3d/cisco_logs_analyzer.git
+- pip install -r requirements.txt
+- Configure your DB Credentials in settings.py
+- python manage.py migrate - For migrations
+- python manage.py runserver
+
+That's all folks.
+ 
