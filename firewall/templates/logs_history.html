@@ -1,0 +1,59 @@
+{% extends "layout/layout.html" %}{% block content %}
+
+            <div class="main-content pt-4">
+                <div class="breadcrumb">
+                   <h1>Logs Table</h1>
+                    <ul>
+                        <li><a href="/logs_history">Cisco Logs History</a></li>
+                        <li>Logs history table</li>
+                    </ul>
+                </div>
+                <div class="separator-breadcrumb border-top"></div>
+                
+                
+                <div class="row">
+        
+                    <div class="row col-md-12">
+                        <div class="col-md-12 mb-4">
+                            <div class="card text-left">
+                                <div class="card-body">
+                                    
+                                    <div class="table-responsive">
+                                        <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Input Cisco logs file</th>
+                                                    <th>Timestamp</th>
+                                                    <th>Action</th>
+                                                    
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for i in data %}
+                                                    <tr>
+                                                        <td>{{i.id}}</td>
+                                                        <td><a href="/download/{{i.input_file}}" target="_blank">{{i.input_file}}</a></td>
+                                                        <td>{{i.timestamp}}</td>
+                                                        <td><a href="/cisco_logs/{{i.input_file}}" target="_blank">View Formatted Logs</a></td>
+                                                        
+                                                          
+                                                    </tr>
+                                                {% endfor %} 
+                                            </tbody>   
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of row-->
+                
+            <!-- end of main-content -->
+        </div>
+                
+              
+{% endblock %}

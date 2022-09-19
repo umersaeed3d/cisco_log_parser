@@ -1,0 +1,119 @@
+{% extends "layout/layout.html" %}{% block content %}
+
+            <div class="main-content pt-4">
+                <div class="breadcrumb">
+                   <h1>Log Table</h1>
+                    <ul>
+                        <li><a href="/cisco_logs">Cisco Logs</a></li>
+                        <li>Logs table</li>
+                    </ul>
+                </div>
+                <div class="separator-breadcrumb border-top"></div>
+                <div class="row" >
+                    <div class="card mb-4 offset-4">
+                            <div class="card-body">
+                                <div class="card-title" style="font-weight:400 !important; text-align:center !important">Charts</div>
+                                <div class="btn-group" role="group" aria-label="Charts">
+                                    <button class="btn btn-secondary" type="button" id="all" onclick="showSpecificChart(this.value, this.id)" value="5" >All</button>
+                                    <button class="btn btn-secondary" type="button" id="chart1" onclick="showSpecificChart(this.value, this.id)" value="1">Protocol</button>
+                                    <button class="btn btn-secondary" type="button" id="chart2" onclick="showSpecificChart(this.value, this.id)" value="2">Dst Port</button>
+                                    <button class="btn btn-secondary" type="button" id="chart3" onclick="showSpecificChart(this.value, this.id)" value="3">Source IP</button>
+                                    <button class="btn btn-secondary" type="button" id="chart4" onclick="showSpecificChart(this.value, this.id)" value="4">Dst IP</button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="row" >
+                    <div class="col-lg-6" id="chart1-protocol">
+                        <div class="card mb-6">
+                            <div class="card-body">
+                                <div class="card-title">Protocol Chart</div>
+                                <div id="protocolChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" id="chart2-dstport">
+                        <div class="card mb-6" >
+                            <div class="card-body">
+                                <div class="card-title">Dst Port Chart</div>
+                                <div id="dstPortChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                
+                    <div class="col-lg-6" id="chart3-sourceIP">
+                        <div class="card mb-6" >
+                            <div class="card-body">
+                                <div class="card-title">Source IP Chart</div>
+                                <div id="srcIPChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6" id="chart4-dstIP">
+                        <div class="card mb-6" >
+                            <div class="card-body">
+                                <div class="card-title">Destination IP Chart</div>
+                                <div id="destIPChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+               
+            </div> 
+            {% comment %} end of row {% endcomment %}
+            <br>
+                <div class="row">
+        
+                    <div class="row col-md-12">
+                        <div class="col-md-12 mb-4">
+                            <div class="card text-left">
+                                <div class="card-body">
+                                    
+                                    <div class="table-responsive">
+                                        <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Timestamp</th>
+                                                    <th>Access</th>
+                                                    <th>Protocol</th>
+                                                    
+                                                    <th>Src IP</th>
+                                                    <th>Src Port</th>
+                                                    <th>Dst IP</th>
+                                                    <th>Dst Port</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for i in data %}
+                                                    <tr>
+                                                        <td>{{i.0}}</td>
+                                                        <td>{{i.1}}</td>
+                                                        <td>{{i.2}}</td>
+                                                        <td>{{i.3}}</td>
+                                                        <td>{{i.4}}</td>
+                                                        <td>{{i.5}}</td>
+                                                        <td>{{i.6}}</td>
+                                                        
+                                                    </tr>
+                                                {% endfor %} 
+                                            </tbody>   
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of row-->
+                
+            <!-- end of main-content -->
+        </div>
+                
+     
+    
+    
+{% endblock %}

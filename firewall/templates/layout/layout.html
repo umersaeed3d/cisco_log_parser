@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" dir="">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Log Analyzer Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
+    <link href="{% static '/css/themes/lite-purple.css' %}" rel="stylesheet" />
+    <link href="{% static '/css/plugins/perfect-scrollbar.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static '/css/plugins/fontawesome-5.css' %}" />
+    <link href="{% static '/css/plugins/metisMenu.min.css' %}" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+</head>
+
+<body class="text-left">
+    <div class="app-admin-wrap layout-sidebar-vertical sidebar-full">
+        <div class="sidebar-panel bg-white">
+            <div class="gull-brand pr-3 text-center mt-4 mb-2 d-flex justify-content-center align-items-center"><img class="pl-3" src="{% static '/images/logo.png' %}" alt="alt" />
+                <!--  <span class=" item-name text-20 text-primary font-weight-700">GULL</span> -->
+                <div class="sidebar-compact-switch ml-auto"><span></span></div>
+            </div>
+            <!--  user -->
+            <div class="scroll-nav ps ps--active-y" data-perfect-scrollbar="data-perfect-scrollbar" data-suppress-scroll-x="true">
+                <div class="side-nav">
+                    <div class="main-menu">
+                        <ul class="metismenu" id="menu">
+                           
+                            <li class="Ul_li--hover"><a class="has-arrow" href="/dashboard"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Dashboard</span></a>
+                                
+                            </li>
+                            <li class="Ul_li--hover"><a class="has-arrow" href="/cisco_logs"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Cisco Logs</span></a>
+                                
+                            </li>
+                            
+                            <li class="Ul_li--hover"><a class="has-arrow" href="/logs_history"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Uploaded Logs History</span></a>
+                                
+                            </li>
+
+                            {% if user.is_superuser %}
+                                <li class="Ul_li--hover"><a class="has-arrow" href="/users"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">All Users</span></a>        
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+            <!--  side-nav-close -->
+        </div>
+        <div class="switch-overlay"></div>
+        <div class="main-content-wrap mobile-menu-content bg-off-white m-0">
+            <header class="main-header bg-white d-flex justify-content-between p-2">
+                 <div class="header-toggle">
+                    <div class="menu-toggle mobile-menu-icon">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    {% comment %} <i class="i-Add-UserStar mr-3 text-20 cursor-pointer" data-toggle="tooltip" data-placement="top" title="" data-original-title="Todo"></i><i class="i-Speach-Bubble-3 mr-3 text-20 cursor-pointer" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chat"></i><i class="i-Email mr-3 text-20 mobile-hide cursor-pointer" data-toggle="tooltip" data-placement="top" title="" data-original-title="Inbox"></i><i class="i-Calendar-4 mr-3 mobile-hide text-20 cursor-pointer" data-toggle="tooltip" data-placement="top" title="" data-original-title="Calendar"></i><i class="i-Checkout-Basket mobile-hide mr-3 text-20 cursor-pointer" data-toggle="tooltip" data-placement="top" title="" data-original-title="Calendar"></i> {% endcomment %}
+                    
+                <h3 style="font-family:Arial, Helvetica, sans-serif;"><b>Welcome {{user.get_username}}</b></h3>
+                    {% comment %} <i class="i-Add-UserStar mr-3 text-20 cursor-pointer" data-toggle="tooltip" data-placement="top" title="" data-original-title="Todo"></i><i class="i-Speach-Bubble-3 mr-3 text-20 cursor-pointer" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chat"></i><i class="i-Email mr-3 text-20 mobile-hide cursor-pointer" data-toggle="tooltip" data-placement="top" title="" data-original-title="Inbox"></i><i class="i-Calendar-4 mr-3 mobile-hide text-20 cursor-pointer" data-toggle="tooltip" data-placement="top" title="" data-original-title="Calendar"></i><i class="i-Checkout-Basket mobile-hide mr-3 text-20 cursor-pointer" data-toggle="tooltip" data-placement="top" title="" data-original-title="Calendar"></i> {% endcomment %}
+                </div>
+                <div class="header-part-right">
+                    <!-- Full screen toggle-->
+                    <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen=""></i>
+                    <button class="btn btn-outline-dark m-1" data-toggle="modal" data-target="#verifyModalContent2" type="button">Change Password</button> 
+                    
+                    <a href="/logout"  style="text-decoration: none;"><button class="btn btn-outline-dark m-1" type="button">Log out</button> </a>
+                    
+                   
+                </div>
+            </header><!-- ============ Body content start ============= -->
+            {% block content %}{% endblock %}
+        
+    </div>
+    <div class="modal fade" id="verifyModalContent2" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent2" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="verifyModalContent2_title">Change Password</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/change_password" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="recipient-name-1">Current Password</label>
+                                        <input class="form-control" id="recipient-name-1" type="password" name="current_password"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="recipient-name-1">New Password</label>
+                                        <input class="form-control" id="recipient-name-1" type="password" name="new_password"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="recipient-name-1">New Password</label>
+                                        <input class="form-control" id="recipient-name-1" type="password" name="new_password1"/>
+                                    </div>
+                                   
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+    <!-- ============ Search UI End ============= -->
+    <script src="{% static '/js/plugins/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static '/js/plugins/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '/js/plugins/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static '/js/scripts/tooltip.script.min.js' %}"></script>
+    <script src="{% static '/js/scripts/script.min.js' %}"></script>
+    <script src="{% static '/js/scripts/script_2.min.js' %}"></script>
+    <script src="{% static '/js/scripts/sidebar.large.script.min.js '%}"></script>
+    <script src="{% static '/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static '/js/plugins/metisMenu.min.js' %}"></script>
+    <script src="{% static '/js/scripts/layout-sidebar-vertical.min.js' %}"></script>
+    <script src="{% static '/js/plugins/echarts.min.js' %}"></script>
+    <script src="{% static '/js/scripts/echarts.script.min.js' %}"></script>
+    
+    <script src="{% static '/js/scripts/echart.options.min.js' %}"></script>
+    <script src="{% static '/js/scripts/dashboard.v1.script.min.js' %}"></script>
+    <script src="{% static '/js/plugins/datatables.min.js' %}"></script>
+    <script src="{% static '/js/scripts/datatables.script.min.js' %}"></script>
+    <script src="{% static '/js/scripts/apexPieDonutChart.script.min.js' %}"></script>
+    <script src="{% static '/js/plugins/apexcharts.dataseries.js' %}"></script>
+    <script src="{% static '/js/plugins/apexcharts.min.js' %}"></script>
+    <script src="{% static '/js/scripts/apexBarChart.script.min.js' %}"></script>   
+    <script src="{% static '/js/scripts/customizer.script.min.js' %}"></script>
+    <script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+    </script>
+    <script>
+        function showSpecificChart(value,id){
+
+            let ids = {'chart1':'chart1-protocol','chart2':'chart2-dstport','chart3':'chart3-sourceIP','chart4':'chart4-dstIP'}
+            if (value == 5){
+                for (var i in ids){
+                    $('#'+ids[i]).css('display','block')
+                    $('#'+ids[i]).removeClass('offset-3')
+                }
+            }else{
+                for(var i in ids){
+                    if(i == id){
+                        $('#'+ids[i]).css('display','block')
+                        $('#'+ids[i]).addClass('offset-3')
+                    }else{
+                        $('#'+ids[i]).css('display','none')
+                    }
+                }
+            }
+            
+            
+
+        }
+    </script>
+    <script>
+    
+            
+        $(document).ready(function () {
+
+
+            var options = {
+                chart: {
+                width: '100%',
+                type: 'pie'
+                },
+                labels: [{% for i in protocolData  %}
+                                    "{{i.name}}",
+                                {% endfor %}],
+                series: [{% for i in protocolData  %}
+                                    {{i.value}},
+                                {% endfor %}],
+                legend: {
+                position: 'bottom'
+                },
+                responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                    width: 300
+                    },
+                    legend: {
+                    position: 'bottom',
+                    offsetY: 40
+                    }
+                }
+                }]
+            };
+            var chart = new ApexCharts(document.querySelector("#protocolChart"), options);
+            chart.render(); 
+              
+             var options = {
+                chart: {
+                width: '100%',
+                type: 'pie'
+                },
+                labels: [{% for i in dstPortData  %}
+                                    "{{i.name}}",
+                                {% endfor %}],
+                series: [{% for i in dstPortData  %}
+                                    {{i.value}},
+                                {% endfor %}],
+                legend: {
+                position: 'bottom'
+                },
+                responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                    width: 300
+                    },
+                    legend: {
+                    position: 'bottom',
+                    offsetY: 40
+                    }
+                }
+                }]
+            };
+            var chart = new ApexCharts(document.querySelector("#dstPortChart"), options);
+            chart.render(); 
+
+
+         
+            
+
+             var options = {
+                chart: {
+                height: 500,
+                type: 'bar',
+                toolbar: {
+                    show: false
+                }
+                },
+                plotOptions: {
+                bar: {
+                    barHeight: '100%',
+                    distributed: true,
+                    horizontal: true,
+                    dataLabels: {
+                    position: 'bottom'
+                    },
+                    endingShape: 'rounded'
+                }
+                },
+                colors: ['#33b2df', '#546E7A', '#d4526e', '#13d8aa', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e', '#f48024', '#69d2e7'],
+                dataLabels: {
+                enabled: true,
+                textAnchor: 'start',
+                style: {
+                    colors: ['#fff']
+                },
+                formatter: function formatter(val, opt) {
+                    return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val;
+                },
+                offsetX: 0,
+                dropShadow: {
+                    enabled: true
+                }
+                },
+                series: [{
+                data: [{% for i in dstIPData  %}
+                                    {{i.value}},
+                                {% endfor %}]
+                }],
+                stroke: {
+                width: 1,
+                colors: ['#fff']
+                },
+                xaxis: {
+                categories: [{% for i in dstIPData  %}
+                                    "{{i.name}}",
+                                {% endfor %}]
+                },
+                yaxis: {
+                labels: {
+                    show: false
+                }
+                },
+                // title: {
+                //     text: 'Custom DataLabels',
+                //     align: 'center',
+                //     floating: true
+                // },
+                // subtitle: {
+                //     text: 'Category Names as DataLabels inside bars',
+                //     align: 'center',
+                // },
+                tooltip: {
+                theme: 'dark',
+                x: {
+                    show: false
+                },
+                y: {
+                    title: {
+                    formatter: function formatter() {
+                        return '';
+                    }
+                    }
+                }
+                }
+            };
+            var chart = new ApexCharts(document.querySelector("#destIPChart"), options);
+            chart.render();
+
+
+            var options = {
+                chart: {
+                height: 500,
+                type: 'bar',
+                toolbar: {
+                    show: false
+                }
+                },
+                plotOptions: {
+                bar: {
+                    barHeight: '100%',
+                    distributed: true,
+                    horizontal: true,
+                    dataLabels: {
+                    position: 'bottom'
+                    },
+                    endingShape: 'rounded'
+                }
+                },
+                colors: ['#33b2df', '#546E7A', '#d4526e', '#13d8aa', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e', '#f48024', '#69d2e7'],
+                dataLabels: {
+                enabled: true,
+                textAnchor: 'start',
+                style: {
+                    colors: ['#fff']
+                },
+                formatter: function formatter(val, opt) {
+                    return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val;
+                },
+                offsetX: 0,
+                dropShadow: {
+                    enabled: true
+                }
+                },
+                series: [{
+                data: [{% for i in srcIPData  %}
+                                    {{i.value}},
+                                {% endfor %}]
+                }],
+                stroke: {
+                width: 1,
+                colors: ['#fff']
+                },
+                xaxis: {
+                categories: [{% for i in srcIPData  %}
+                                    "{{i.name}}",
+                                {% endfor %}]
+                },
+                yaxis: {
+                labels: {
+                    show: false
+                }
+                },
+                // title: {
+                //     text: 'Custom DataLabels',
+                //     align: 'center',
+                //     floating: true
+                // },
+                // subtitle: {
+                //     text: 'Category Names as DataLabels inside bars',
+                //     align: 'center',
+                // },
+                tooltip: {
+                theme: 'dark',
+                x: {
+                    show: false
+                },
+                y: {
+                    title: {
+                    formatter: function formatter() {
+                        return '';
+                    }
+                    }
+                }
+                }
+            };
+            var chart = new ApexCharts(document.querySelector("#srcIPChart"), options);
+            chart.render();
+             
+
+            
+
+            
+           
+        });
+
+    </script>
+</body>
+
+</html>

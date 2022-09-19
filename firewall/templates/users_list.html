@@ -1,0 +1,58 @@
+{% extends "layout/layout.html" %}{% block content %}
+
+            <div class="main-content pt-4">
+                <div class="breadcrumb">
+                   <h1>Log Table</h1>
+                    <ul>
+                        <li><a href="/users">All Users</a></li>
+                        <li>Users list table</li>
+                    </ul>
+                </div>
+                <div class="separator-breadcrumb border-top"></div>
+                
+                
+                <div class="row">
+        
+                    <div class="row col-md-12">
+                        <div class="col-md-12 mb-4">
+                            <div class="card text-left">
+                                <div class="card-body">
+                                    
+                                    <div class="table-responsive">
+                                        <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Username</th>
+                                                    <th>Email</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for i in data %}
+                                                    <tr>
+                                                        <td>{{i.id}}</td>
+                                                        <td>{{i.first_name}}</td>
+                                                        <td>{{i.last_name}}</td>
+                                                        <td>{{i.username}}</td>
+                                                         <td>{{i.email}}</td>
+                                                    </tr>
+                                                {% endfor %} 
+                                            </tbody>   
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of row-->
+                
+            <!-- end of main-content -->
+        </div>
+                
+ {% endblock %}             
+        
