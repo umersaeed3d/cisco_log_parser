@@ -143,17 +143,6 @@ def changePassword(request):
         return redirect('/dashboard')
     
 
-def migration_logs(request):
-
-    if request.user.is_authenticated:
-        if request.user.is_superuser:
-            records = MigrationLogs.objects.all()
-        else:
-            records = MigrationLogs.objects.filter(user_id=request.user.id)
-        return render(request,'migration_history.html',{'data':records})
-    
-    else:
-        raise PermissionDenied
 
 def cisco_logs(request, input_file=False):
 
