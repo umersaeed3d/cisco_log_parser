@@ -20,7 +20,7 @@ It contains a dashboard with authentication with following functionalities:
 
 # Steps:
 
-- git clone https://github.com/umersaeed3d/cisco_logs_analyzer.git
+- git clone https://github.com/umersaeed3d/cisco_log_parser
 - pip install -r requirements.txt
 - Configure your DB Credentials in settings.py
 - python manage.py migrate - For migrations
